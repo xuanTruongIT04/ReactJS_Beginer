@@ -15,7 +15,6 @@ class DisplayInfo extends React.Component {
     // Destructuring array/objectFit
     const { listUsers } = this.props;
 
-    console.log(listUsers);
     return (
       <div>
         <hr className="my-20" />

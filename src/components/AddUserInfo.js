@@ -1,6 +1,6 @@
 import React from "react";
 
-class UserInfo extends React.Component {
+class AddUserInfo extends React.Component {
   state = {
     name: "School",
     address: "Phú Bình - Thái Nguyên",
@@ -19,10 +19,22 @@ class UserInfo extends React.Component {
     });
   }
 
+  handleOnChangeAddress(e) {
+    this.setState({
+      address: e.target.value,
+    });
+  }
+
   handleOnSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    this.props.handleAddUser({
+      id: Math.floor(Math.random() * 1000 + 1) + "-random",
+      name: this.state.name,
+      age: this.state.age,
+      address: this.state.address,
+    });
   }
+
   render() {
     return (
       <div>
@@ -54,11 +66,20 @@ class UserInfo extends React.Component {
           />
           <br />
           <br />
-          <input type="submit" value="Cập nhật" />
+          <input
+            type="text"
+            value={this.state.address}
+            onChange={(e) => {
+              this.handleOnChangeAddress(e);
+            }}
+          />
+          <br />
+          <br />
+          <input type="submit" value="Thêm mới" />
         </form>
       </div>
     );
   }
 }
 
-export default UserInfo;
+export default AddUserInfo;
