@@ -1,5 +1,5 @@
 import React from "react";
-import UserInfo from "./UserInfo"
+import UserInfo from "./UserInfo";
 import DisplayInfo from "./DisplayInfo";
 
 class MyComponent extends React.Component {
@@ -35,18 +35,15 @@ class MyComponent extends React.Component {
         age: 17,
         address: "Thái nguyên",
       },
-
-    ]
-  }
+    ],
+  };
   // JSX
   render() {
     // DRY: Don't Repeat Yourself
     return (
       <div>
         <UserInfo />
-        <DisplayInfo
-          listUsers={this.state.listUsers}
-        />
+        <DisplayInfo listUsers={this.state.listUsers} />
       </div>
     );
   }

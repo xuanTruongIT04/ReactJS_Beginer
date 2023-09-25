@@ -1,28 +1,48 @@
-import React from 'react';
+import React from "react";
 
 class DisplayInfo extends React.Component {
-    render() {
-        // Destructuring array/objectFit
+  handleShowHide() {
+    this.setState({
+      isShow: !this.state.isShow
+    })
+  }
 
-        const { listUsers } = this.props;
-        console.log(listUsers);
-        return (
-            <div>
-                {
-                    listUsers.map((user) => {
-                        return (
-                            <div key={user.id}>
-                                <p>
-                                    My name is <b>{user.name}</b>, <b>{user.age}</b> years old and I'm from <b>{user.address}</b>
-                                </p>
-                            </div>
-                        );
-                    })
-                }
+  state = {
+    isShow: true
+  }
 
-            </div>
-        );
-    }
+  render() {
+    // Destructuring array/objectFit
+    const { listUsers } = this.props;
+
+    console.log(listUsers);
+    return (
+      <div>
+        <hr className="my-20" />
+        <button
+          onClick={() => {
+            this.handleShowHide();
+          }}
+        >
+          {this.state.isShow ? "Hide list users" : "Show list users"}
+        </button>
+        {this.state.isShow && (
+          <div>
+            {listUsers.map((user) => {
+              return (
+                <div key={user.id}>
+                  <p className={user.age > 18 ? "blue" : "red"}>
+                    My name is <b>{user.name}</b>, <b>{user.age}</b> years old
+                    and I'm from <b>{user.address}</b>
+                  </p>
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
-export default DisplayInfo
+export default DisplayInfo;
