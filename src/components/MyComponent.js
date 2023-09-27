@@ -48,10 +48,14 @@ class MyComponent extends React.Component {
   render() {
     // DRY: Don't Repeat Yourself
     return (
-      <div>
-        <AddUserInfo handleAddUser={this.handleAddUser} />
-        <DisplayInfo listUsers={this.state.listUsers} />
-      </div>
+      <>
+        <div className='a'>
+          <AddUserInfo handleAddUser={this.handleAddUser} />
+        </div>
+        <div className='b'>
+          <DisplayInfo listUsers={this.state.listUsers} />
+        </div>
+      </>
     );
   }
 }

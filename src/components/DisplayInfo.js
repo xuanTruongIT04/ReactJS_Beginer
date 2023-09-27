@@ -31,7 +31,7 @@ class DisplayInfo extends React.Component {
           {this.state.isShow ? "Hide list users" : "Show list users"}
         </button>
         {this.state.isShow && (
-          <div>
+          <>
             {listUsers.map((user) => {
               return (
                 <div key={user.id}>
@@ -42,7 +42,7 @@ class DisplayInfo extends React.Component {
                 </div>
               );
             })}
-          </div>
+          </>
         )}
       </div>
     );
