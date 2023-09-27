@@ -18,33 +18,37 @@ class DisplayInfo extends React.Component {
     const { listUsers } = this.props;
 
     return (
-      <div className="display-info-container">
-        <div className="logo">
-          <img src={Logo} className="img" />
+      // Show object or array in template => JSON.stringify(object)
+      /* {JSON.stringify(listUsers)} */
+      <>
+        <div className="display-info-container">
+          <div className="logo">
+            <img src={Logo} className="img" />
+          </div>
+          <hr className="my-20" />
+          <button
+            onClick={() => {
+              this.handleShowHide();
+            }}
+          >
+            {this.state.isShow ? "Hide list users" : "Show list users"}
+          </button>
+          {this.state.isShow && (
+            <>
+              {listUsers.map((user) => {
+                return (
+                  <div key={user.id}>
+                    <p className={user.age > 18 ? "blue" : "red"}>
+                      My name is <b>{user.name}</b>, <b>{user.age}</b> years old
+                      and I'm from <b>{user.address}</b>
+                    </p>
+                  </div>
+                );
+              })}
+            </>
+          )}
         </div>
-        <hr className="my-20" />
-        <button
-          onClick={() => {
-            this.handleShowHide();
-          }}
-        >
-          {this.state.isShow ? "Hide list users" : "Show list users"}
-        </button>
-        {this.state.isShow && (
-          <>
-            {listUsers.map((user) => {
-              return (
-                <div key={user.id}>
-                  <p className={user.age > 18 ? "blue" : "red"}>
-                    My name is <b>{user.name}</b>, <b>{user.age}</b> years old
-                    and I'm from <b>{user.address}</b>
-                  </p>
-                </div>
-              );
-            })}
-          </>
-        )}
-      </div>
+      </>
     );
   }
 }
