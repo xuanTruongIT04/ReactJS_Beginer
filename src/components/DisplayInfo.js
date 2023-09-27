@@ -1,15 +1,17 @@
 import React from "react";
-import './DisplayInfo.scss'
+import "./DisplayInfo.scss";
+import Logo from "./../logo.svg";
+
 class DisplayInfo extends React.Component {
   handleShowHide() {
     this.setState({
-      isShow: !this.state.isShow
-    })
+      isShow: !this.state.isShow,
+    });
   }
 
   state = {
-    isShow: true
-  }
+    isShow: true,
+  };
 
   render() {
     // Destructuring array/objectFit
@@ -17,6 +19,9 @@ class DisplayInfo extends React.Component {
 
     return (
       <div className="display-info-container">
+        <div className="logo">
+          <img src={Logo} className="img" />
+        </div>
         <hr className="my-20" />
         <button
           onClick={() => {
