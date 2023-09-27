@@ -1,5 +1,5 @@
 import React from "react";
-
+import './DisplayInfo.scss'
 class DisplayInfo extends React.Component {
   handleShowHide() {
     this.setState({
@@ -16,7 +16,7 @@ class DisplayInfo extends React.Component {
     const { listUsers } = this.props;
 
     return (
-      <div>
+      <div className="display-info-container">
         <hr className="my-20" />
         <button
           onClick={() => {
