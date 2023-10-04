@@ -3,15 +3,27 @@ import "./DisplayInfo.scss";
 // import Logo from "./../logo.svg";
 
 class DisplayInfo extends React.Component {
+  constructor(props) {
+    console.log("call constructor: 1");
+    super(props);
+    this.state = {
+      isShow: true,
+    };
+  }
+
   handleShowHide() {
     this.setState({
       isShow: !this.state.isShow,
     });
   }
 
-  state = {
-    isShow: true,
-  };
+  componentDidMount() {
+    console.log("Call me did mount");
+  }
+
+  componentDidUpdate() {
+    console.log("Call me did update");
+  }
 
   handleDeleteUser = (user) => {
     this.props.handleDeleteUser(user.id);
@@ -19,6 +31,7 @@ class DisplayInfo extends React.Component {
 
   render() {
     // Destructuring array/objectFit
+    console.log("Call me render")
     const { listUsers } = this.props;
 
     return (
