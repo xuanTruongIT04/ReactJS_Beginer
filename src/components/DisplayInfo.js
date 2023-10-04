@@ -1,6 +1,6 @@
 import React from "react";
 import "./DisplayInfo.scss";
-import Logo from "./../logo.svg";
+// import Logo from "./../logo.svg";
 
 class DisplayInfo extends React.Component {
   handleShowHide() {
@@ -13,6 +13,10 @@ class DisplayInfo extends React.Component {
     isShow: true,
   };
 
+  handleDeleteUser = (user) => {
+    this.props.handleDeleteUser(user.id);
+  };
+
   render() {
     // Destructuring array/objectFit
     const { listUsers } = this.props;
@@ -22,9 +26,9 @@ class DisplayInfo extends React.Component {
       /* {JSON.stringify(listUsers)} */
       <>
         <div className="display-info-container">
-          <div className="logo">
+          {/* <div className="logo">
             <img src={Logo} className="img" />
-          </div>
+          </div> */}
           <hr className="my-20" />
           <button
             onClick={() => {
@@ -37,11 +41,15 @@ class DisplayInfo extends React.Component {
             <>
               {listUsers.map((user) => {
                 return (
-                  <div key={user.id}>
+                  <div key={user.id} className="user-info">
                     <p className={user.age > 18 ? "blue" : "red"}>
                       My name is <b>{user.name}</b>, <b>{user.age}</b> years old
                       and I'm from <b>{user.address}</b>
                     </p>
+                    {/* {console.log(user)} */}
+                    <button onClick={() => this.handleDeleteUser(user)}>
+                      Delete
+                    </button>
                   </div>
                 );
               })}
