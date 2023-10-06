@@ -1,76 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
 
-class AddUserInfo extends React.Component {
-  state = {
+const AddUserInfo = (props) =>  {
+  const [info, setInfo] = useState({
     name: "School",
     address: "Phú Bình - Thái Nguyên",
     age: 21,
-  };
+  })
 
-  handleOnChangeName(e) {
-    this.setState({
-      name: e.target.value,
-    });
+  const handleOnChangeName = (e) => {
+    console.log(e.value)
+    setInfo({
+      ...info,
+      name: e.target.value
+    })
   }
 
-  handleOnChangeAge(e) {
-    this.setState({
-      age: e.target.value,
-    });
+  const handleOnChangeAge = (e) => {
+    setInfo({
+      ...info,
+      age: e.target.value
+    })
   }
 
-  handleOnChangeAddress(e) {
-    this.setState({
-      address: e.target.value,
-    });
+  const handleOnChangeAddress = (e) => {
+    setInfo({
+      ...info,
+      address: e.target.value
+    })
+    
   }
 
-  handleOnSubmit(e) {
+  const handleOnSubmit = (e) => {
     e.preventDefault();
-    this.props.handleAddUser({
+    props.handleAddUser({
       id: Math.floor(Math.random() * 1000 + 1) + "-random",
-      name: this.state.name,
-      age: this.state.age,
-      address: this.state.address,
+      name: info.name,
+      age: info.age,
+      address: info.address,
     });
   }
 
-  render() {
     return (
       <div>
         <p>
-          My name is <b>{this.state.name}</b>, <b>{this.state.age}</b> years old
-          and I'm from <b>{this.state.address}</b>
+          My name is <b>{info.name}</b>, <b>{info.age}</b> years old
+          and I'm from <b>{info.address}</b>
         </p>
 
         <form
           onSubmit={(e) => {
-            this.handleOnSubmit(e);
+            handleOnSubmit(e);
           }}
         >
           <input
             type="textq"
-            value={this.state.name}
+            value={info.name}
             onChange={(e) => {
-              this.handleOnChangeName(e);
+              handleOnChangeName(e);
             }}
           />{" "}
           <br />
           <br />
           <input
             type="text"
-            value={this.state.age}
+            value={info.age}
             onChange={(e) => {
-              this.handleOnChangeAge(e);
+              handleOnChangeAge(e);
             }}
           />
           <br />
           <br />
           <input
             type="text"
-            value={this.state.address}
+            value={info.address}
             onChange={(e) => {
-              this.handleOnChangeAddress(e);
+              handleOnChangeAddress(e);
             }}
           />
           <br />
@@ -80,6 +84,5 @@ class AddUserInfo extends React.Component {
       </div>
     );
   }
-}
 
 export default AddUserInfo;
