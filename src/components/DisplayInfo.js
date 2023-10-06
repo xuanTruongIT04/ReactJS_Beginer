@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./DisplayInfo.scss";
 // import Logo from "./../logo.svg";
 
@@ -35,18 +35,23 @@ import "./DisplayInfo.scss";
 //   }
 // }
 
-
 const DisplayInfo = (props) => {
   const { listUsers } = props;
   // Destructuring array/objectFit
-  console.log("Call me render");
+
+  const [isShowHideListUser, setShowHideListUser] = useState(true);
+
+  const handleShowHideListUser = () => {
+    setShowHideListUser(!isShowHideListUser);
+  };
 
   return (
     // Show object or array in template => JSON.stringify(object)
     /* {JSON.stringify(listUsers)} */
     <>
       <div className="display-info-container">
-        {true && (
+        <button onClick={() => handleShowHideListUser()} style={{marginTop: "12px"}} >{isShowHideListUser ? "Hide list user" : "Show list user"}</button>
+        {isShowHideListUser && (
           <>
             {listUsers.map((user) => {
               return (
