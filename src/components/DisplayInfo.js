@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./DisplayInfo.scss";
 
 const DisplayInfo = (props) => {
@@ -10,6 +10,15 @@ const DisplayInfo = (props) => {
   const handleShowHideListUser = () => {
     setShowHideListUser(!isShowHideListUser);
   };
+
+  console.log("Run mounted");
+
+  useEffect(() => {
+    if(listUsers.length === 0) {
+      alert("Bạn đã xoá toàn bộ item")
+    }
+    console.log("Run useEffect");
+  }, [listUsers]);
 
   return (
     // Show object or array in template => JSON.stringify(object)
@@ -27,7 +36,7 @@ const DisplayInfo = (props) => {
               return (
                 <div key={user.id} className="user-info">
                   <hr />
-                  <p className={user.age > 18 ? "blue" : "red"}>
+                  <p className={user.age > 18 ? "blue" : "red"}> 
                     My name is <b>{user.name}</b>, <b>{user.age}</b> years old
                     and I'm from <b>{user.address}</b>
                   </p>
