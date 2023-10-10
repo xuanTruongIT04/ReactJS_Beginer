@@ -19,7 +19,9 @@ import sidebarBg from "../../assets/bg2.jpg";
 import "react-pro-sidebar/dist/css/styles.css";
 import { FaReact } from "react-icons/fa";
 import { RiDashboardFill } from "react-icons/ri";
+import { Link } from "react-router-dom";
 import "./Sidebar.scss";
+
 const SideBar = ({ collapsed, toggled, handleToggleSidebar }) => {
   return (
     <>
@@ -50,11 +52,17 @@ const SideBar = ({ collapsed, toggled, handleToggleSidebar }) => {
 
         <SidebarContent>
           <Menu iconShape="circle">
-            <MenuItem icon={<RiDashboardFill />}>Dashboard</MenuItem>
+            <MenuItem icon={<RiDashboardFill />}>
+              Dashboard
+              <Link to="/admins" />
+            </MenuItem>
           </Menu>
           <Menu iconShape="circle">
             <SubMenu title="Features" icon={<FaHeart />}>
-              <MenuItem>Quản lý Users</MenuItem>
+              <MenuItem>
+                Quản lý Users
+                <Link to="/admins/manage-users" />
+              </MenuItem>
               <MenuItem>Quản lý Bài Quiz</MenuItem>
               <MenuItem>Quản lý Câu Hỏi</MenuItem>
             </SubMenu>
