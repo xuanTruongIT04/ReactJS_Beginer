@@ -16,9 +16,10 @@ import {
   FaHeart,
 } from "react-icons/fa";
 import sidebarBg from "../../assets/bg2.jpg";
-
 import "react-pro-sidebar/dist/css/styles.css";
-
+import { FaReact } from "react-icons/fa";
+import { RiDashboardFill } from "react-icons/ri";
+import "./Sidebar.scss";
 const SideBar = ({ collapsed, toggled, handleToggleSidebar }) => {
   return (
     <>
@@ -42,29 +43,20 @@ const SideBar = ({ collapsed, toggled, handleToggleSidebar }) => {
               whiteSpace: "nowrap",
             }}
           >
-            School - It's me
+            <FaReact size={"3em"} color={"00bfff"} />
+            <span className="title">School - It's me</span>
           </div>
         </SidebarHeader>
 
         <SidebarContent>
           <Menu iconShape="circle">
-            <MenuItem
-              icon={<FaTachometerAlt />}
-              suffix={<span className="badge red">New</span>}
-            >
-              dashboard
-            </MenuItem>
-            <MenuItem icon={<FaGem />}>components </MenuItem>
+            <MenuItem icon={<RiDashboardFill />}>Dashboard</MenuItem>
           </Menu>
           <Menu iconShape="circle">
-            <SubMenu
-              prefix={<span className="badge gray">3</span>}
-              title="With Prefix"
-              icon={<FaHeart />}
-            >
-              <MenuItem> 1</MenuItem>
-              <MenuItem> 2</MenuItem>
-              <MenuItem> 3</MenuItem>
+            <SubMenu title="Features" icon={<FaHeart />}>
+              <MenuItem>Quản lý Users</MenuItem>
+              <MenuItem>Quản lý Bài Quiz</MenuItem>
+              <MenuItem>Quản lý Câu Hỏi</MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>
@@ -77,7 +69,7 @@ const SideBar = ({ collapsed, toggled, handleToggleSidebar }) => {
             }}
           >
             <a
-              href="https://github.com/azouaoui-med/react-pro-sidebar"
+              href="https://github.com/xuanTruongIT04"
               target="_blank"
               className="sidebar-btn"
               rel="noopener noreferrer"
@@ -89,7 +81,9 @@ const SideBar = ({ collapsed, toggled, handleToggleSidebar }) => {
                   textOverflow: "ellipsis",
                   overflow: "hidden",
                 }}
-              ></span>
+              >
+                Xuân Trường
+              </span>
             </a>
           </div>
         </SidebarFooter>
