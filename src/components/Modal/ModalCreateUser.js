@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FcPlus } from "react-icons/fc";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 import "../Admin/Content/ManageUser.scss";
@@ -37,17 +38,26 @@ const ModalCreateUser = (props) => {
     }
   };
 
-  const handleUpdateCreateUser = async () => {
-    // Validated
+  const validateEmail = (email) => {
+    return String(email)
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      );
+  };
 
-    // Save by call API
-    // let data = {
-    //   email: email,
-    //   password: password,
-    //   username: username,
-    //   role: role,
-    //   userImage: image,
-    // };
+  const handleSubmitCreateUser = async () => {
+    // Validated
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      toast.error("Invalid email");
+      return;
+    }
+
+    if(!password) {
+      toast.error("Invalid password");
+      return;
+    }
 
     const data = new FormData();
     data.append("email", email);
@@ -60,7 +70,14 @@ const ModalCreateUser = (props) => {
       "http://localhost:8081/api/v1/participant",
       data
     );
-    console.log("== CHECK RESPONSE", res);
+
+    if(!res?.data?.EC) {
+      toast.success(res?.data?.EM)
+      handleClose();
+    }else {
+      toast.error(res?.data?.EM)
+    }
+
   };
 
   return (
@@ -145,7 +162,7 @@ const ModalCreateUser = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={() => handleUpdateCreateUser()}>
+          <Button variant="primary" onClick={() => handleSubmitCreateUser()}>
             Save
           </Button>
         </Modal.Footer>
