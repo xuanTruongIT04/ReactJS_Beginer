@@ -1,4 +1,5 @@
-import { ModalCreateUser } from "../../Modal/Modal";
+import { ModalCreateUser } from "../../Modal/ModalCreateUser";
+import "./ManageUser.scss";
 
 const ManageUser = (props) => {
   return (
