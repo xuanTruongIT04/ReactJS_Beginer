@@ -2,14 +2,29 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FcPlus } from "react-icons/fc";
+import axios from "axios";
 
 import "../Admin/Content/ManageUser.scss";
 
-function ModalCreateUser() {
-  const [show, setShow] = useState(false);
+const ModalCreateUser = (props) => {
+  const { show, setShow } = props;
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("USER");
+  const [image, setImage] = useState("");
+  const [previewImage, setPreviewImage] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+    setEmail("");
+    setUsername("");
+    setPassword("");
+    setRole("USER");
+    setImage("");
+    setPreviewImage(false);
+  };
 
   const handleUpdateImage = (event) => {
     if (event?.target?.files?.[0]) {
@@ -22,19 +37,34 @@ function ModalCreateUser() {
     }
   };
 
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("USER");
-  const [image, setImage] = useState("");
-  const [previewImage, setPreviewImage] = useState(false);
+  const handleUpdateCreateUser = async () => {
+    // Validated
+
+    // Save by call API
+    // let data = {
+    //   email: email,
+    //   password: password,
+    //   username: username,
+    //   role: role,
+    //   userImage: image,
+    // };
+
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    data.append("username", username);
+    data.append("role", role);
+    data.append("userImage", image);
+
+    let res = await axios.post(
+      "http://localhost:8081/api/v1/participant",
+      data
+    );
+    console.log("== CHECK RESPONSE", res);
+  };
 
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button>
-
       <Modal
         size="xl"
         backdrop="static"
@@ -115,13 +145,13 @@ function ModalCreateUser() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={() => handleUpdateCreateUser()}>
             Save
           </Button>
         </Modal.Footer>
       </Modal>
     </>
   );
-}
+};
 
 export { ModalCreateUser };

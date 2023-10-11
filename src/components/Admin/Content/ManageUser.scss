@@ -1,3 +1,20 @@
+.manage-user-container {
+  padding: 10px;
+
+  .title {
+    font-weight: 600;
+    font-size: 20px;
+  }
+
+  .users-content {
+    .btn-create-new {
+      button {
+        margin: 15px 0;
+      }
+    }
+  }
+}
+
 .modal-create-user {
   .label-upload-image {
     display: flex;
