@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FcPlus } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
+import { postCreateNewUser } from "../../services/apiSerivce";
 
 import "../Admin/Content/ManageUser.scss";
 
@@ -54,30 +54,19 @@ const ModalCreateUser = (props) => {
       return;
     }
 
-    if(!password) {
+    if (!password) {
       toast.error("Invalid password");
       return;
     }
 
-    const data = new FormData();
-    data.append("email", email);
-    data.append("password", password);
-    data.append("username", username);
-    data.append("role", role);
-    data.append("userImage", image);
+    let data = await postCreateNewUser(email, password, username, role, image);
 
-    let res = await axios.post(
-      "http://localhost:8081/api/v1/participant",
-      data
-    );
-
-    if(!res?.data?.EC) {
-      toast.success(res?.data?.EM)
+    if (!data?.EC) {
+      toast.success(data.EM);
       handleClose();
-    }else {
-      toast.error(res?.data?.EM)
+    } else {
+      toast.error(data.EM);
     }
-
   };
 
   return (
