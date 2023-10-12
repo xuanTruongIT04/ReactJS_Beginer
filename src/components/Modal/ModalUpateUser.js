@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FcPlus } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
-import { postCreateNewUser } from "../../services/apiSerivce";
+import { putUpdateUser } from "../../services/apiSerivce";
 import _ from "lodash";
 
 import "../Admin/Content/ManageUser.scss";
@@ -26,6 +26,7 @@ const ModalUpdateUser = (props) => {
     setRole("User");
     setImage("");
     setPreviewImage(false);
+    props.resetUpdateData();
   };
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const ModalUpdateUser = (props) => {
       let file = event.target.files[0];
       let url = URL.createObjectURL(file);
       setPreviewImage(url);
-      setImage(url);
+      setImage(file);
     } else {
       // setPreviewImage(false)
     }
@@ -67,12 +68,7 @@ const ModalUpdateUser = (props) => {
       return;
     }
 
-    if (!password) {
-      toast.error("Invalid password");
-      return;
-    }
-
-    let data = await postCreateNewUser(email, password, username, role, image);
+    let data = await putUpdateUser(dataUserUpdate.id, username, role, image);
 
     if (!data?.EC) {
       toast.success(data.EM);
