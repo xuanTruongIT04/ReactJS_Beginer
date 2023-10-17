@@ -17,7 +17,7 @@ const ManageUser = (props) => {
   const [dataUserUpdate, setDataUserUpdate] = useState({});
   const [dataUserDelete, setDataUserDelete] = useState({});
 
-  useEffect(async () => {
+  useEffect(() => {
     fetchListUsers();
   }, []);
 
@@ -92,6 +92,7 @@ const ManageUser = (props) => {
           show={showModalDeleteUser}
           setShow={setShowModalDeleteUser}
           dataUserDelete={dataUserDelete}
+          fetchListUsers={fetchListUsers}
         />
       </div>
     </div>
